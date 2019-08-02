@@ -192,4 +192,14 @@ public class MainActivity extends AppCompatActivity implements OpenFileChooserCa
             filePathCallback = null;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (promptDialog != null && promptDialog.isShowing()) {
+            cancelOperation();
+            promptDialog.dismiss();
+            return;
+        }
+        super.onBackPressed();
+    }
 }
