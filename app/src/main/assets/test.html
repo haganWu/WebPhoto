@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="Generator" content="EditPlus?"/>
+    <meta name="Author" content=""/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <title>H5 Get Mobile Photo</title>
+</head>
+<body>
+<script>
+            function previewFile1() {
+            var img = document.getElementById("preview1");
+            var file =document.getElementById("demo1").files[0];
+            var text2 = document.getElementById("text2");
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+            img.src = reader.result;
+            }, false);
+
+            if (file) {
+            reader.readAsDataURL(file);
+            }
+            }
+
+            function previewFile2() {
+            var img2 = document.getElementById("preview2");
+            var file2 = document.getElementById("demo2").files[0];
+            var reader2 = new FileReader();
+            reader2.addEventListener("load", function () {
+            img2.src = reader2.result;
+            }, false);
+
+            if (file2) {
+            reader2.readAsDataURL(file2);
+            }
+            }
+
+</script>
+<form action="">
+    <p>step1:
+        <input name="uploadImg1" id="demo1" onchange="previewFile1()" type="file" accept="image/*"/>
+    </p>
+
+    <p>step2:
+        <input name="uploadImg2" id="demo2" onchange="previewFile2()" type="file" accept="image/*"/>
+    </p>
+    <img width="100" height="130" id="preview1" src="111.jpg"/>
+    <br/>
+    <img width="100" height="130" id="preview2" src="222.jpg"/>
+</form>
+</body>
+</html>
