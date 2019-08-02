@@ -1,6 +1,5 @@
 package hagan.web.photo;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements OpenFileChooserCa
     private static final int REQUEST_CODE_TAKE_CAMERA = 0x2222;
     private Intent mSourceIntent;
     //针对5.0以下版本
-    private ValueCallback<Uri> mUploadMsg;
+    private ValueCallback<Uri> mUploadMessage;
     //这对5.0以上版本
     private ValueCallback<Uri[]> filePathCallback;
     private File tempFile;
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OpenFileChooserCa
     @Override
     public void openFileChooserCallBack(ValueCallback<Uri> uploadMsg, String acceptType) {
         Log.e("hagan", "openFileChooserCallBack");
-        mUploadMsg = uploadMsg;
+        mUploadMessage = uploadMsg;
         showOptions();
     }
 
@@ -103,34 +102,44 @@ public class MainActivity extends AppCompatActivity implements OpenFileChooserCa
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (resultCode == RESULT_CANCELED) {
-            if (mUploadMsg != null) {
-                mUploadMsg.onReceiveValue(null);
-                mUploadMsg = null;
-            }
-            if (filePathCallback != null) {
-                filePathCallback.onReceiveValue(null);
-                filePathCallback = null;
-            }
-            return;
-        }
-        if (requestCode == REQUEST_CODE_TAKE_CAMERA || requestCode == REQUEST_CODE_PICK_IMAGE) {
-            if (null == mUploadMsg && filePathCallback == null)
+        if (requestCode == REQUEST_CODE_PICK_IMAGE ||
+                requestCode == REQUEST_CODE_TAKE_CAMERA) {
+            if (null == mUploadMessage && filePathCallback == null)
                 return;
-            Uri[] uris = new Uri[1];
-            Uri result = intent == null || resultCode != Activity.RESULT_OK ? null : intent.getData();
-            uris[0] = result;
-            if (mUploadMsg != null) {
-                mUploadMsg.onReceiveValue(result);
-                mUploadMsg = null;
-            }
+            if (resultCode == RESULT_CANCELED) {
+                if (mUploadMessage != null) {
+                    mUploadMessage.onReceiveValue(null);
+                    mUploadMessage = null;
+                }
+                if (filePathCallback != null) {
+                    filePathCallback.onReceiveValue(null);
+                    filePathCallback = null;
+                }
+            } else if (resultCode == RESULT_OK) {
+                Uri result = null;
+                if (intent != null && intent.getData() != null) {
+                    result = intent.getData();
+                }
+                if (result == null) {
+                    if (photoUri != null) {
+                        result = photoUri;
+                    }
+                }
+                Uri[] uris = new Uri[1];
+                uris[0] = result;
+                if (mUploadMessage != null) {
+                    mUploadMessage.onReceiveValue(result);
+                    mUploadMessage = null;
+                }
 
-            if (filePathCallback != null) {
-                filePathCallback.onReceiveValue(uris);
-                mUploadMsg = null;
+                if (filePathCallback != null) {
+                    filePathCallback.onReceiveValue(uris);
+                    mUploadMessage = null;
+                }
             }
-
         }
+
+
     }
 
     public void showOptions() {
