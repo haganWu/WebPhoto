@@ -5,4 +5,14 @@
         <item>图片</item>
         <item>相机</item>
     </string-array>
+
+    <array name="normalPermissionNames">
+        <item>@string/permission_storage</item>
+        <item>@string/permission_location</item>
+        <item>@string/permission_camera</item>
+    </array>
+    <array name="cameraPermissionNames">
+        <item>@string/permission_storage</item>
+        <item>@string/permission_camera</item>
+    </array>
 </resources>

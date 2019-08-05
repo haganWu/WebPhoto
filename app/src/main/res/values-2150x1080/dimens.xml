@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="common_tip_dialog_width">320dp</dimen>
+</resources>

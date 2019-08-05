@@ -12,7 +12,6 @@
             function previewFile1() {
             var img = document.getElementById("preview1");
             var file =document.getElementById("demo1").files[0];
-            var text2 = document.getElementById("text2");
             var reader = new FileReader();
             reader.addEventListener("load", function () {
             img.src = reader.result;
@@ -45,9 +44,9 @@
     <p>step2:
         <input name="uploadImg2" id="demo2" onchange="previewFile2()" type="file" accept="image/*"/>
     </p>
-    <img width="100" height="140" id="preview1" src="111.jpg"/>
+    <img width="100" height="130" id="preview1" src="111.jpg"/>
     <br/>
-    <img width="100" height="140" id="preview2" src="222.jpg"/>
+    <img width="100" height="130" id="preview2" src="222.jpg"/>
 </form>
 </body>
 </html>

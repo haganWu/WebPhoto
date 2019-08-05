@@ -3,4 +3,9 @@
     <color name="colorPrimary">#c2a469</color>
     <color name="colorPrimaryDark">#c2a469</color>
     <color name="colorAccent">#c2a469</color>
+    <color name="dialog_bg">#727e847e</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="text_black_color">#404040</color>
+    <color name="text_gray_color">#6f6f6f</color>
+    <color name="blue_color">#0396ff</color>
 </resources>

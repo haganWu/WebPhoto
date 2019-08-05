@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">H5UploadPhoto</string>
+    <string name="app_name">上传图片</string>
+    <string name="kindly_reminder">温馨提示</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="permission_apply">权限申请</string>
+    <string name="not_get_permission">未获得权限</string>
+    <string name="open_camera_permission_tip"><![CDATA[访问相机需打开存储权限和相机权限,选择\"权限\"->\"存储\"和\"相机\"打开存储权限开关和相机权限开关]]></string>
+    <string name="open_photo_permission_tip"><![CDATA[访问相册需打开存储权限,选择\"权限\"->\"存储\" 打开存储权限开关]]></string>
+    <string name="permission_dialog_title">开启%s权限</string>
+    <string name="permission_dialog_msg">为了您能正常使用%s，需要以下权限</string>
+    <string name="permission_title">请允许获取%s</string>
+    <string name="permission_denied">我们需要获取%1$s, 否则您将无法正常使用%2$s</string>
+    <string name="permission_denied_with_naac">"由于%1$s无法获取%2$s, 不能正常运行, 请开启权限后再使用。\n\n设置路径: 应用管理->%3$s->权限"</string>
+    <string name="permission_reject">拒绝</string>
+    <string name="permission_go_to_setting">去设置</string>
+    <string name="permission_storage">存储空间</string>
+    <string name="permission_location">位置信息</string>
+    <string name="permission_camera">拍照权限</string>
+    <string name="next">下一步</string>
 </resources>
