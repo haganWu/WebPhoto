@@ -194,7 +194,7 @@ public class PermissionActivity extends AppCompatActivity {
                 }
                 if (hadDeny) {
                     Log.e(TAG, "请求多个权限当出现Deny时关闭PermissionActivity");
-                    onFinish();
+                    onFinish(false);
                 }
                 break;
         }
@@ -212,9 +212,9 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
 
-    private void onFinish() {
+    private void onFinish(boolean doNext) {
         if (mCallback != null)
-            mCallback.onFinish();
+            mCallback.onFinish(doNext);
         finish();
     }
 

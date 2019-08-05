@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 
 import com.web.photo.R;
 
@@ -38,10 +39,10 @@ public class PermissionUtil {
             R.mipmap.permission_ic_storage, R.mipmap.permission_ic_location, R.mipmap.permission_ic_camera};
 
 
-    private String[] mCameraePermissionNames;
-    private String[] mCameraePermissions = {
+    private String[] mCameraPermissionNames;
+    private String[] mCameraPermissions = {
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA};
-    private int[] mCameraePermissionIconRes = {
+    private int[] mCameraPermissionIconRes = {
             R.mipmap.permission_ic_storage, R.mipmap.permission_ic_camera};
 
     private int mFilterColor = 0;
@@ -54,7 +55,7 @@ public class PermissionUtil {
     public PermissionUtil(Context context) {
         mContext = context;
         mNormalPermissionNames = mContext.getResources().getStringArray(R.array.normalPermissionNames);
-        mCameraePermissionNames = mContext.getResources().getStringArray(R.array.cameraPermissionNames);
+        mCameraPermissionNames = mContext.getResources().getStringArray(R.array.cameraPermissionNames);
 
     }
 
@@ -98,14 +99,15 @@ public class PermissionUtil {
 
     private List<PermissionItem> getCameraePermissions() {
         List<PermissionItem> permissionItems = new ArrayList<>();
-        for (int i = 0; i < mCameraePermissionNames.length; i++) {
-            permissionItems.add(new PermissionItem(mCameraePermissions[i], mCameraePermissionNames[i], mCameraePermissionIconRes[i]));
+        for (int i = 0; i < mCameraPermissionNames.length; i++) {
+            permissionItems.add(new PermissionItem(mCameraPermissions[i], mCameraPermissionNames[i], mCameraPermissionIconRes[i]));
         }
         return permissionItems;
     }
 
     public static boolean checkPermission(Context context, String permission) {
         int checkPermission = ContextCompat.checkSelfPermission(context, permission);
+        Log.e("hagan", "checkPermission 检测是否已经开启了权限 permission:" + permission + ";checkPermission:" + checkPermission);
         if (checkPermission == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
@@ -120,15 +122,15 @@ public class PermissionUtil {
     public void checkMultiplePermission(PermissionCallback callback) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             if (callback != null)
-                callback.onFinish();
+                callback.onFinish(true);
             return;
         }
 
         if (mCheckPermissions == null) {
             mCheckPermissions = new ArrayList<>();
-            mCheckPermissions.addAll(getNormalPermissions());
         }
-
+        mCheckPermissions.clear();
+        mCheckPermissions.addAll(getNormalPermissions());
         //检查权限，过滤已允许的权限
         Iterator<PermissionItem> iterator = mCheckPermissions.listIterator();
         while (iterator.hasNext()) {
@@ -142,7 +144,7 @@ public class PermissionUtil {
             startActivity();
         } else {
             if (callback != null)
-                callback.onFinish();
+                callback.onFinish(true);
         }
     }
 
@@ -154,14 +156,15 @@ public class PermissionUtil {
     public void checkCameraePermission(PermissionCallback callback) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             if (callback != null)
-                callback.onFinish();
+                callback.onFinish(true);
             return;
         }
 
         if (mCheckPermissions == null) {
             mCheckPermissions = new ArrayList<>();
-            mCheckPermissions.addAll(getCameraePermissions());
         }
+        mCheckPermissions.clear();
+        mCheckPermissions.addAll(getCameraePermissions());
 
         //检查权限，过滤已允许的权限
         Iterator<PermissionItem> iterator = mCheckPermissions.listIterator();
@@ -175,8 +178,10 @@ public class PermissionUtil {
         if (mCheckPermissions.size() > 0) {
             startActivity();
         } else {
-            if (callback != null)
-                callback.onFinish();
+            if (callback != null) {
+                callback.onFinish(true);
+            }
+
         }
     }
 
@@ -189,7 +194,7 @@ public class PermissionUtil {
     public void checkSinglePermission(String permission, PermissionCallback callback) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkPermission(mContext, permission)) {
             if (callback != null)
-                callback.onGuarantee(permission, 0,true);
+                callback.onGuarantee(permission, 0, true);
             return;
         }
         mCallback = callback;

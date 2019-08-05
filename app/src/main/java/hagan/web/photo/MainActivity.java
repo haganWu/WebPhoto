@@ -242,8 +242,11 @@ public class MainActivity extends AppCompatActivity implements OpenFileChooserCa
             }
 
             @Override
-            public void onFinish() {
+            public void onFinish(boolean doNext) {
                 Log.e("hagan", "相机权限判断 onFinish onFinish");
+                if (doNext) {
+                    gotoCamera();
+                }
             }
 
             @Override
@@ -288,11 +291,14 @@ public class MainActivity extends AppCompatActivity implements OpenFileChooserCa
         PermissionUtil.create(MainActivity.this).checkSinglePermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionCallback() {
             @Override
             public void onClose() {
+                cancelOperation();
             }
 
             @Override
-            public void onFinish() {
-                gotoPhoto();
+            public void onFinish(boolean doNext) {
+                if (doNext) {
+                    gotoPhoto();
+                }
             }
 
             @Override

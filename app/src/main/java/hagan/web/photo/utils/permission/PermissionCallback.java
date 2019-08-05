@@ -10,7 +10,7 @@ import java.io.Serializable;
 public interface PermissionCallback extends Serializable {
     void onClose();
 
-    void onFinish();
+    void onFinish(boolean doNext);
 
     void onDeny(String permission, int position);
 
