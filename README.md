@@ -35,7 +35,7 @@ Android客户端实现H5页面调用本地相册和相机上传图片
 
 5.上传图片成功后的效果
 
-![成上传](https://github.com/haganWu/WebPhoto/blob/master/screenshots/device-2019-08-06-100145.png)
+![上传成功](https://github.com/haganWu/WebPhoto/blob/master/screenshots/device-2019-08-06-100145.png)
 
 
 
