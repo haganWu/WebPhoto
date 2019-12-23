@@ -6,7 +6,7 @@ Android客户端实现H5页面调用本地相册和相机上传图片
 
 效果图如下:
 
-1.点击"选择文件"是弹窗提示通过相机/相册上传图片:
+1.点击"选择文件"时弹窗提示通过相机/相册上传图片:
 
 ![相机/相册选择](https://github.com/haganWu/WebPhoto/blob/master/screenshots/device-2019-08-06-095839.png)
 
